@@ -9,7 +9,6 @@ class ContactForm extends Component {
 
   handleChange = event => {
     const { name, value } = event.currentTarget;
-
     this.setState({
       [name]: value,
     });
@@ -20,6 +19,7 @@ class ContactForm extends Component {
     console.log('from contact form', this.state);
 
     this.props.onSubmit(this.state.name);
+    // this.props.onSubmit(this.state.number);
 
     this.reset();
   };

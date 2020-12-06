@@ -3,18 +3,23 @@ import shortid from 'shortid';
 import './App.css';
 import ContactList from './components/ContactList';
 import ContactForm from 'components/ContactForm/ContactForm';
+import Filter from 'components/Filter/Filter';
 import contacts from 'contacts.json';
 
 class App extends Component {
   state = {
     contacts,
+    filter: '',
   };
 
-  addContact = text => {
+  addContact = (name, number) => {
     const contact = {
       id: shortid.generate(),
-      name: text,
+      name,
+      number,
     };
+
+    console.log(contact);
 
     this.setState(prevState => ({
       contacts: [contact, ...prevState.contacts],
@@ -27,8 +32,18 @@ class App extends Component {
     }));
   };
 
+  changeFilter = event => {
+    this.setState({ filter: event.currentTarget.value });
+  };
+
   render() {
-    const contacts = this.state.contacts;
+    // const contacts = this.state.contacts;
+
+    const normalizedFilter = this.state.filter.toLowerCase();
+
+    const visibleContacts = this.state.contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter),
+    );
 
     return (
       <div className="phonebook">
@@ -36,7 +51,11 @@ class App extends Component {
         <ContactForm onSubmit={this.addContact} />
 
         <h2>Contacts</h2>
-        <ContactList contacts={contacts} onDeleteItem={this.deleteContact} />
+        <Filter value={this.state.filter} onChange={this.changeFilter} />
+        <ContactList
+          contacts={visibleContacts}
+          onDeleteItem={this.deleteContact}
+        />
       </div>
     );
   }
