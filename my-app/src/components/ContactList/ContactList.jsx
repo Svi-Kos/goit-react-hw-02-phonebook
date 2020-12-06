@@ -6,7 +6,11 @@ const ContactList = ({ contacts, onDeleteItem }) => (
     {contacts.map(({ id, name }) => (
       <li key={id} className={s.contactListItem}>
         <p>{name}</p>
-        <button className={s.deleteBtn} onClick={() => onDeleteItem(id)}>
+        <button
+          type="button"
+          className={s.deleteBtn}
+          onClick={() => onDeleteItem(id)}
+        >
           Delete
         </button>
       </li>
