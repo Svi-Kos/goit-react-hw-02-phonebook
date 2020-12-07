@@ -5,8 +5,9 @@ const ContactList = ({ contacts, onDeleteItem }) => (
   <ul className={s.contactList}>
     {contacts.map(({ id, name, number }) => (
       <li key={id} className={s.contactListItem}>
-        <p>{name}</p>
-        <p>{number}</p>
+        <p>
+          {name}: {number}
+        </p>
         <button
           type="button"
           className={s.deleteBtn}

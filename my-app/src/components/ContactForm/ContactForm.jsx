@@ -17,9 +17,10 @@ class ContactForm extends Component {
   handleSubmit = event => {
     event.preventDefault();
     console.log('from contact form', this.state);
+    const name = this.state.name;
+    const number = this.state.number;
 
-    this.props.onSubmit(this.state.name);
-    // this.props.onSubmit(this.state.number);
+    this.props.onSubmit(name, number);
 
     this.reset();
   };
@@ -51,6 +52,7 @@ class ContactForm extends Component {
             value={this.state.number}
             onChange={this.handleChange}
           />
+          <p className={s.numberFormat}>Format: xxx-xx-xx</p>
         </label>
         <button type="submit" className={s.contactFormBtn}>
           Add contact

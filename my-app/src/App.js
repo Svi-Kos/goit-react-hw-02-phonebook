@@ -19,11 +19,15 @@ class App extends Component {
       number,
     };
 
-    console.log(contact);
+    const uniqName = this.state.contacts.filter(
+      contact => name === contact.name,
+    );
 
-    this.setState(prevState => ({
-      contacts: [contact, ...prevState.contacts],
-    }));
+    uniqName.length !== 1
+      ? this.setState(prevState => ({
+          contacts: [contact, ...prevState.contacts],
+        }))
+      : alert(`${name} is already in contacts`);
   };
 
   deleteContact = contactId => {
@@ -37,10 +41,7 @@ class App extends Component {
   };
 
   render() {
-    // const contacts = this.state.contacts;
-
     const normalizedFilter = this.state.filter.toLowerCase();
-
     const visibleContacts = this.state.contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter),
     );
