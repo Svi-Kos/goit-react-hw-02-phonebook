@@ -16,7 +16,7 @@ class ContactForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log('from contact form', this.state);
+
     const name = this.state.name;
     const number = this.state.number;
 
